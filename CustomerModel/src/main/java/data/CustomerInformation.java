@@ -6,7 +6,7 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
 
     private static int customerID;
     private static int totalCustomer;
-    private DataUtilities utilities;
+    private static final DataUtilities utilities;
     private String generatedCustomerId;
     private String name;
     private String surname;
@@ -31,15 +31,16 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
     static {
         totalCustomer += 1;
         customerID += 1;
+        utilities = new DataUtilities();
     }
     private CustomerInformation(){
         generatedCustomerId = "00" + customerID;
-//        utilities = new DataUtilities();
     }
 
     public CustomerInformation(String byVal_name, String byVal_surname, String byVal_username, String byVal_password){
         new CustomerInformation();
-        this.name = byVal_name;
+        setAccountUniqueId();
+        this.name = utilities.capitalise(byVal_name);
         this.surname = byVal_surname;
         this.username = byVal_username;
         this.password = byVal_password;
@@ -66,7 +67,7 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
 
     @Override
     public String getName() {
-        return utilities.capitalise(name);
+        return name;
     }
 
     @Override
@@ -76,8 +77,7 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
 
     @Override
     public String getFullName() {
-        String fullname = name + " " + surname;
-        return utilities.capitalise(fullname);
+        return this.name + " " + this.surname;
     }
 
     @Override
@@ -189,7 +189,7 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
 
     @Override
     public void setAccountNumber() {
-        this.accountId = utilities.generateAccountNumber();
+        this.accountNumber = utilities.generateAccountNumber();
     }
 
     @Override
@@ -249,6 +249,7 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
 
     @Override
     public String getCard() {
+        setCardNumber();
         return this.cardInformation.cardNumber();
     }
 
@@ -260,5 +261,48 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
     @Override
     public double getBalance() {
         return balance;
+    }
+
+
+    @Override
+    public String toString() {
+//        return "CustomerInformation{" +
+//                "accountId='" + accountId + '\'' +
+//                ", name='" + name + '\'' +
+//                ", surname='" + surname + '\'' +
+//                ", username='" + username + '\'' +
+//                ", password='" + password + '\'' +
+//                ", addressOne='" + addressOne + '\'' +
+//                ", addressTwo='" + addressTwo + '\'' +
+//                ", town='" + town + '\'' +
+//                ", state='" + state + '\'' +
+//                ", zipcode='" + zipcode + '\'' +
+//                ", email='" + email + '\'' +
+//                ", phoneNumber='" + phoneNumber + '\'' +
+//                ", passportNumber='" + passportNumber + '\'' +
+//                ", accountNumber='" + accountNumber + '\'' +
+//                ", pinCard=" + pinCard +
+//                ", accountType='" + accountType + '\'' +
+//                ", cardInformation=" + cardInformation +
+//                ", tierLevel='" + tierLevel + '\'' +
+//                ", balance=" + balance +
+//                '}';
+        String fullAddress = addressOne + " " + addressTwo + " " + town;
+        String cityAddress = town + " " + state + " " + zipcode;
+        return "Customer Detail Information" +
+                "\nFull Name: " + getFullName() +
+                "\nUsername: " + username +
+                "\nPassword: " + password +
+                "\nFull Address: " + fullAddress +
+                "\nCity : " + cityAddress +
+                "\nContact: " + phoneNumber +
+                "\nEmail: " + email +
+                "\nPassport Id: " + passportNumber +
+                "\nAccount Number: " + accountNumber +
+                "\nAccount Balance: " + balance +
+                "\nCard Number: " + getCard() +
+                "\nCard Pin: " + pinCard +
+                "\nAccount Type: " + accountType +
+                "\nAccount Level: " + tierLevel;
     }
 }

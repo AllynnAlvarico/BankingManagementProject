@@ -15,21 +15,15 @@ public class DataUtilities {
     }
 
     public String generateAccountNumber(){
-        int min = 1001;
-        int max = 9999;
-        int range = max - min;
-        int randomNum = (int)(Math.random() * range)+ min;
-
-        return "ACC" + randomNum + " " + randomNum + " " + randomNum;
+        return "ACC" + generate() + " " + generate() + " " + generate();
     }
     public String generateCardNumber(){
-        int min = 1001;
-        int max = 9999;
-        int range = max - min;
-        int randomNum = (int)(Math.random() * range)+ min;
-        return randomNum + " " + randomNum + " " + randomNum;
+        return generate() + " " + generate() + " " + generate();
     }
     public int generatePin(){
+        return generate();
+    }
+    private int generate(){
         int min = 1001;
         int max = 9999;
         int range = max - min;
