@@ -33,17 +33,23 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
         customerID += 1;
         utilities = new DataUtilities();
     }
-    private CustomerInformation(){
-        generatedCustomerId = "00" + customerID;
+    public CustomerInformation(){
+
     }
 
     public CustomerInformation(String byVal_name, String byVal_surname, String byVal_username, String byVal_password){
-        new CustomerInformation();
+        setCustomerID();
         setAccountUniqueId();
         this.name = utilities.capitalise(byVal_name);
         this.surname = byVal_surname;
         this.username = byVal_username;
         this.password = byVal_password;
+    }
+    private void setCustomerID(){
+        generatedCustomerId = "00" + customerID;
+    }
+    public void setCustomerID(String byVal_id){
+        generatedCustomerId = byVal_id;
     }
     @Override
     public void setName(String byVal_name) {
@@ -275,12 +281,13 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
 
 
         return "Customer Detail Information" +
+                "\nCustomer Account ID: " + accountId +
                 "\nFull Name: " + getFullName() +
                 "\nUsername: " + username +
                 "\nPassword: " + password + " " + password.length() +
                 "\nHidden Password: " + passwordSecurity + " " + passwordSecurity.length() +
                 "\nFull Address: " + fullAddress +
-                "\nCity : " + cityAddress +
+                "\nCity: " + cityAddress +
                 "\nContact: " + phoneNumber +
                 "\nEmail: " + email +
                 "\nPassport Id: " + passportNumber +
