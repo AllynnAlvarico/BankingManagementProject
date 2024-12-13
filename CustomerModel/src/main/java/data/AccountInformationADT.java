@@ -7,7 +7,7 @@ public interface AccountInformationADT {
     public void changePin(short newPin);
     public void setAccountType(String accountType);
     public void setCardNumber();
-    public void setTierLevel(String tierLevel);
+    public void setCategory(String category);
     public void setBalance();
     public void setBalance(double newBalance);
     public String getAccountId();
@@ -15,6 +15,6 @@ public interface AccountInformationADT {
     public short getPin();
     public String getAccountType();
     public String getCard();
-    public String getTierLevel();
+    public String getCategory();
     public double getBalance();
 }

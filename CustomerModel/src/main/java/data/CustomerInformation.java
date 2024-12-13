@@ -25,7 +25,7 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
     private short pinCard;
     private String accountType;
     private CardInformation cardInformation;
-    private String tierLevel;
+    private String category;
     private double balance;
 
     static {
@@ -213,8 +213,8 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
     }
 
     @Override
-    public void setTierLevel(String tierLevel) {
-        this.tierLevel = tierLevel;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override
@@ -254,8 +254,8 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
     }
 
     @Override
-    public String getTierLevel() {
-        return this.tierLevel;
+    public String getCategory() {
+        return this.category;
     }
 
     @Override
@@ -266,33 +266,19 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
 
     @Override
     public String toString() {
-//        return "CustomerInformation{" +
-//                "accountId='" + accountId + '\'' +
-//                ", name='" + name + '\'' +
-//                ", surname='" + surname + '\'' +
-//                ", username='" + username + '\'' +
-//                ", password='" + password + '\'' +
-//                ", addressOne='" + addressOne + '\'' +
-//                ", addressTwo='" + addressTwo + '\'' +
-//                ", town='" + town + '\'' +
-//                ", state='" + state + '\'' +
-//                ", zipcode='" + zipcode + '\'' +
-//                ", email='" + email + '\'' +
-//                ", phoneNumber='" + phoneNumber + '\'' +
-//                ", passportNumber='" + passportNumber + '\'' +
-//                ", accountNumber='" + accountNumber + '\'' +
-//                ", pinCard=" + pinCard +
-//                ", accountType='" + accountType + '\'' +
-//                ", cardInformation=" + cardInformation +
-//                ", tierLevel='" + tierLevel + '\'' +
-//                ", balance=" + balance +
-//                '}';
         String fullAddress = addressOne + " " + addressTwo + " " + town;
         String cityAddress = town + " " + state + " " + zipcode;
+
+        StringBuilder passwordSecurity = new StringBuilder();
+
+        passwordSecurity.append("*".repeat(password.length()));
+
+
         return "Customer Detail Information" +
                 "\nFull Name: " + getFullName() +
                 "\nUsername: " + username +
-                "\nPassword: " + password +
+                "\nPassword: " + password + " " + password.length() +
+                "\nHidden Password: " + passwordSecurity + " " + passwordSecurity.length() +
                 "\nFull Address: " + fullAddress +
                 "\nCity : " + cityAddress +
                 "\nContact: " + phoneNumber +
@@ -303,6 +289,6 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
                 "\nCard Number: " + getCard() +
                 "\nCard Pin: " + pinCard +
                 "\nAccount Type: " + accountType +
-                "\nAccount Level: " + tierLevel;
+                "\nCategory: " + category;
     }
 }
