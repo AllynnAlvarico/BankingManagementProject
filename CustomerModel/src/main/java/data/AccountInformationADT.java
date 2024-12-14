@@ -9,7 +9,7 @@ public interface AccountInformationADT {
     public void setCardNumber();
     public void setCategory(String category);
     public void setBalance();
-    public void setBalance(double newBalance);
+    public void setBalance(String newBalance);
     public String getAccountId();
     public String getAccountNumber();
     public short getPin();

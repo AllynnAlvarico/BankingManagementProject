@@ -1,1 +1,2 @@
-Customer Account ID,Name,Surname,Username,Password,Address 1,Address 2,Town/City,State,Zipcode,Phone Number,Email Address,Passport Number,Account Type,Category Type
+Account ID,Name,Surname,Username,Password,Address 1,Address 2,Town/City,State,Zipcode,Phone Number,Email Address,Passport Number,IBAN Number,Card Number,Card Pin,Account Balance,Account Type,Category Type
+001,Kate,Samson,casselyn.kate,08213edd,4 Mill Road,Killincarrig,Greystones,Co.Wicklow,A63 C566,086-404-2923,allynn_alvarico@yahoo.com,PL1234567890,ACC9672 6850 7194,2201 7437 6081,3700,0.0,Business Account,Youth

@@ -69,9 +69,20 @@ public class AccountProcess {
     public void createUserAccount(String byVal_name, String byVal_surname, String byVal_username, String byVal_password) {
         accountUser = new CustomerInformation(byVal_name, byVal_surname, byVal_username, byVal_password);
         accountUser.setAccountNumber();
+        accountUser.setCardNumber();
         accountUser.setCardPin();
         accountUser.setBalance();
     }
+//    public void createUserAccount(
+//            String byVal_name, String byVal_surname, String byVal_username, String byVal_password,
+//            String byVal_accountNumber, String byVal_cardNumber, String byVal_cardPin, String byVal_balance
+//    ) {
+//        accountUser = new CustomerInformation(byVal_name, byVal_surname, byVal_username, byVal_password);
+//        accountUser.setAccountNumber(byVal_accountNumber);
+//        accountUser.setCardNumber(byVal_cardNumber);
+//        accountUser.setCardPin(byVal_cardPin);
+//        accountUser.setBalance(byVal_balance);
+//    }
 
     public void setCustomerAddress(String byVal_address1, String byVal_address2, String byVal_town, String byVal_state, String byVal_zipcode) {
         accountUser.setAddress1(byVal_address1);

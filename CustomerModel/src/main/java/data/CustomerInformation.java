@@ -49,11 +49,27 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
         generatedCustomerId = "00" + customerID;
     }
     public void setCustomerID(String byVal_id){
-        generatedCustomerId = byVal_id;
+        accountId = byVal_id;
     }
     @Override
     public void setName(String byVal_name) {
         this.name = byVal_name;
+    }
+
+    public String getAddressTwo() {
+        return addressTwo;
+    }
+
+    public short getPinCard() {
+        return pinCard;
+    }
+
+    public CardInformation getCardInformation() {
+        return cardInformation;
+    }
+
+    public String getAddressOne(){
+        return addressOne;
     }
 
     @Override
@@ -197,10 +213,16 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
     public void setAccountNumber() {
         this.accountNumber = utilities.generateAccountNumber();
     }
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
 
     @Override
     public void setCardPin() {
         this.pinCard = (short) utilities.generatePin();
+    }
+    public void setCardPin(String cardPin) {
+        this.pinCard = Short.parseShort(cardPin);
     }
 
     @Override
@@ -217,6 +239,9 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
     public void setCardNumber() {
         cardInformation = new CardInformation(utilities.generateCardNumber());
     }
+    public void setCardNumber(String byVal_cardNumber) {
+        cardInformation = new CardInformation(byVal_cardNumber);
+    }
 
     @Override
     public void setCategory(String category) {
@@ -229,8 +254,8 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
     }
 
     @Override
-    public void setBalance(double newBalance) {
-        this.balance = newBalance;
+    public void setBalance(String newBalance) {
+        this.balance = Double.parseDouble(newBalance);
     }
 
     @Override
@@ -293,7 +318,7 @@ public class CustomerInformation implements ActorADT, PersonalInformationADT, Ac
                 "\nPassport Id: " + passportNumber +
                 "\nAccount Number: " + accountNumber +
                 "\nAccount Balance: " + balance +
-                "\nCard Number: " + getCard() +
+                "\nCard Number: " + cardInformation.cardNumber() +
                 "\nCard Pin: " + pinCard +
                 "\nAccount Type: " + accountType +
                 "\nCategory: " + category;
