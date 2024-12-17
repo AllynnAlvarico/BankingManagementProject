@@ -1,6 +1,6 @@
 package test.customer;
 
-import data.CustomerInformation;
+import data.Customer;
 import operations.AccountProcess;
 import util.DataUtilities;
 
@@ -25,7 +25,7 @@ public class TestAddCustomer {
             "Card Number", "Card Pin", "Account Balance","Account Type", "Category Type"
     };
 
-    private ArrayList<CustomerInformation> csvData;
+    private ArrayList<Customer> csvData;
     private AccountProcess accTest;
     {
         utilities = new DataUtilities();
@@ -46,12 +46,12 @@ public class TestAddCustomer {
         if (!userDataFile.exists()){
             createCsvFile();
         }
-        accTest.createUserAccount("Kate", "Samson", "casselyn.kate", "08213edd");
-        accTest.setCustomerAddress("4 Mill Road", "Killincarrig", "Greystones", "Co.Wicklow", "A63 C566");
-        accTest.setAccountUserContact("086-404-2923", "allynn_alvarico@yahoo.com");
-        accTest.setAccountOther("PL1234567890");
-        accTest.setAccountType(1);
-        accTest.setCategoryType(1);
+//        accTest.createUserAccount("Kate", "Samson", "casselyn.kate", "08213edd");
+//        accTest.setCustomerAddress("4 Mill Road", "Killincarrig", "Greystones", "Co.Wicklow", "A63 C566");
+//        accTest.setAccountUserContact("086-404-2923", "allynn_alvarico@yahoo.com");
+//        accTest.setAccountOther("PL1234567890");
+//        accTest.setAccountType(1);
+//        accTest.setCategoryType(1);
 
         addDataElement(accTest);
 
@@ -69,85 +69,85 @@ public class TestAddCustomer {
         }
     }
 
-    public void readDataCsv() {
-
-        String line;
-        String splitBy = ",";
-
-        try {
-            BufferedReader csvReader = new BufferedReader(new FileReader(this.myFile));
-            while ((line = csvReader.readLine()) != null)// &&
-            {
-                CustomerInformation customer = new CustomerInformation();
-                String[] item = line.split(splitBy);
-                if (!line.contains(headers[0])) {
-                    customer.setCustomerID(item[0]);
-                    customer.setName(item[1]);
-                    customer.setSurname(item[2]);
-                    customer.setUsername(item[3]);
-                    customer.setPassword(item[4]);
-                    customer.setAddress1(item[5]);
-                    customer.setAddress2(item[6]);
-                    customer.setTown(item[7]);
-                    customer.setState(item[8]);
-                    customer.setZipcode(item[9]);
-                    customer.setPhoneNumber(item[10]);
-                    customer.setEmail(item[11]);
-                    customer.setPassportInformation(item[12]);
-                    customer.setAccountNumber(item[13]);
-                    customer.setCardNumber(item[14]);
-                    customer.setCardPin(item[15]);
-                    customer.setBalance(item[16]);
-                    customer.setAccountType(item[17]);
-                    customer.setCategory(item[18]);
-
-                    csvData.add(customer);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void readDataCsv() {
+//
+//        String line;
+//        String splitBy = ",";
+//
+//        try {
+////            BufferedReader csvReader = new BufferedReader(new FileReader(this.myFile));
+////            while ((line = csvReader.readLine()) != null)// &&
+////            {
+//////                CustomerInformation customer = new CustomerInformation();
+//////                String[] item = line.split(splitBy);
+//////                if (!line.contains(headers[0])) {
+//////                    customer.setCustomerID(item[0]);
+//////                    customer.setName(item[1]);
+//////                    customer.setSurname(item[2]);
+//////                    customer.setUsername(item[3]);
+//////                    customer.setPassword(item[4]);
+//////                    customer.setAddress1(item[5]);
+//////                    customer.setAddress2(item[6]);
+//////                    customer.setTown(item[7]);
+//////                    customer.setState(item[8]);
+//////                    customer.setZipcode(item[9]);
+//////                    customer.setPhoneNumber(item[10]);
+//////                    customer.setEmail(item[11]);
+//////                    customer.setPassportInformation(item[12]);
+//////                    customer.setAccountNumber(item[13]);
+//////                    customer.setCardNumber(item[14]);
+//////                    customer.setCardPin(item[15]);
+//////                    customer.setBalance(item[16]);
+//////                    customer.setAccountType(item[17]);
+//////                    customer.setCategory(item[18]);
+////
+////                    csvData.add(customer);
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
     public void addDataElement(AccountProcess accountProcess) {
 
         try (PrintWriter csvWriter = new PrintWriter(new FileWriter(this.myFile, true))){
 
-            CustomerInformation customer = accountProcess.getAccountUser();
-            String[] data = getCustomerData(customer);
-            csvWriter.println(String.join(",", data));
+            Customer customer = accountProcess.getAccountUser();
+//            String[] data = getCustomerData(customer);
+//            csvWriter.println(String.join(",", data));
 
         }catch (IOException e) {e.printStackTrace();}
 
     }
 
-    private String[] getCustomerData(CustomerInformation customer) {
-        return new String[] {
-                String.valueOf(customer.getCustomerId()),
-                utilities.capitalise(customer.getName()),
-                utilities.capitalise(customer.getSurname()),
-                customer.getUsername(),
-                customer.getPassword(),
-                utilities.capitalise(customer.getAddressOne()),
-                utilities.capitalise(customer.getAddressTwo()),
-                utilities.capitalise(customer.getTown()),
-                utilities.capitalise(customer.getState()),
-                customer.getZipcode(),
-                customer.getPhoneNumber(),
-                customer.getEmail(),
-                customer.getPassportNumber(),
-                customer.getAccountNumber(),
-                customer.getCardInformation().cardNumber(),
-                String.valueOf(customer.getPinCard()),
-                String.valueOf(customer.getBalance()),
-                customer.getAccountType(),
-                customer.getCategory()
-        };
-    }
+//    private String[] getCustomerData(CustomerInformation customer) {
+//        return new String[] {
+//                String.valueOf(customer.getCustomerId()),
+//                utilities.capitalise(customer.getName()),
+//                utilities.capitalise(customer.getSurname()),
+//                customer.getUsername(),
+//                customer.getPassword(),
+//                utilities.capitalise(customer.getAddressOne()),
+//                utilities.capitalise(customer.getAddressTwo()),
+//                utilities.capitalise(customer.getTown()),
+//                utilities.capitalise(customer.getState()),
+//                customer.getZipcode(),
+//                customer.getPhoneNumber(),
+//                customer.getEmail(),
+//                customer.getPassportNumber(),
+//                customer.getAccountNumber(),
+//                customer.getCardInformation().cardNumber(),
+//                String.valueOf(customer.getPinCard()),
+//                String.valueOf(customer.getBalance()),
+//                customer.getAccountType(),
+//                customer.getCategory()
+//        };
+//    }
 
 
-    public ArrayList<CustomerInformation> getCsvData() {
+    public ArrayList<Customer> getCsvData() {
         return csvData;
     }
 }
