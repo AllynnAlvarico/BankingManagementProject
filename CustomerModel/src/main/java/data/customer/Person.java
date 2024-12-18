@@ -1,4 +1,4 @@
-package data;
+package data.customer;
 
 
 import util.DataUtilities;
@@ -9,7 +9,6 @@ public class Person {
 
     private static int personID;
     private static int totalPerson;
-
 
     private final String firstname;
     private final String lastname;
@@ -30,8 +29,8 @@ public class Person {
             String byVal_gender, byte byVal_age){
         utilities = new DataUtilities();
 
-        if (byVal_firstname == null || byVal_firstname.isEmpty())
-            throw new IllegalArgumentException("Firstname cannot be null or empty");
+        if (byVal_firstname == null || byVal_firstname.isEmpty()) throw new IllegalArgumentException("First name cannot be null or empty");
+        if (byVal_lastname == null || byVal_lastname.isEmpty()) throw new IllegalArgumentException("Surname cannot be null or empty");
 
         this.firstname = byVal_firstname;
         this.lastname = byVal_lastname;
@@ -103,12 +102,12 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", dateOfBirth='" + dateOfBirth + '\'' +
-                ", age=" + age +
-                ", address=" + address.getFullAddress() +
+        return "Personal Information " +
+                "\n==============================================================" +
+                "\nFull Name: " + getFullname() +
+                "\nDate Of Birth: " + dateOfBirth + '\'' +
+                "\nAge: " + age +
+                "\nFull Address =" + address.getFullAddress() +
                 '}';
     }
 }

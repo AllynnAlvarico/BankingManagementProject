@@ -1,8 +1,7 @@
 package main.java;
 
-import data.Gender;
+import data.customer.Gender;
 import operations.AccountProcess;
-import test.customer.TestAddCustomer;
 
 import java.io.FileNotFoundException;
 

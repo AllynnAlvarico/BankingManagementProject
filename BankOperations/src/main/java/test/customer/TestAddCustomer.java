@@ -1,6 +1,6 @@
 package test.customer;
 
-import data.Customer;
+import data.customer.Customer;
 import operations.AccountProcess;
 import util.DataUtilities;
 

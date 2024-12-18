@@ -1,4 +1,6 @@
-package data;
+package data.accounts;
+
+import data.accounts.Account;
 
 public class BankCard {
     private String cardNumber;

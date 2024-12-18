@@ -1,4 +1,4 @@
-package data;
+package data.customer;
 
 public enum Gender {
     MALE ("Male"),

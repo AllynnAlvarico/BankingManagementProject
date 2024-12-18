@@ -1,4 +1,4 @@
-package data;
+package data.customer;
 
 public class Address {
     private String addressLine1;
