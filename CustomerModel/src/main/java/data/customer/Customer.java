@@ -1,79 +1,138 @@
 package data.customer;
 
-import data.accounts.BankCard;
-import data.accounts.Account;
-import operations.AccountType;
-import operations.CategoryType;
+import data.accounts.*;
+import data.adt.CustomerADT;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Customer extends Person {
+/**
+ * This Class(Sub class) inherits from Person Class
+ * ***Purpose*** of this class is to be a Base DTOs - Data Transfer Objects.
+ * Hold Data Objects about the customer which will have
+ * Author: Allynn Alvarico
+ *
+ * Last Modified: 19/12/2024 4.30 am
+ *
+ * Class has 1 constructor
+ * Person(String, String)
+ *
+ * Methods are:
+ * =======================Setters=======================
+ * -setCustomerID();
+ * -setAddress();
+ * -setBankCard();
+ * -setContact();
+ * =======================Getters=======================
+ * -getCustomerID();
+ * -getAddress();
+ * -getBankCard();
+ * -getContact();
+ * -getAccounts();
+ * -getTotalAccount();
+ * -getTotalAccountValue();
+ * ====================Other Methods====================
+ * -addAccount();
+ * -getCheckingAccount();
+ * -getAccountByNumber();
+ * -toString();
+ * -formattedString();
+ *
+ */
+
+public class Customer extends Person implements CustomerADT {
 
     private String customerId;
-    private String email;
-    private String phoneNumber;
-    private final Map<String, Account> accounts;
+    private Address address;
     private BankCard bankCard;
-
-    public Customer(
-            String byVal_firstname, String byVal_lastname, String byVal_dateOfBirth,
-            String nationality, Address byVal_address, String byVal_gender, byte byVal_age,
-            String byVal_email, String byVal_phoneNumber) {
-
-        super(byVal_firstname, byVal_lastname, byVal_dateOfBirth, nationality, byVal_address, byVal_gender, byVal_age);
-        this.email = byVal_email;
-        this.phoneNumber = byVal_phoneNumber;
+    private Contact contact;
+    private Map<String, Account> accounts;
+    public Customer() {
+        super();
+    }
+    public Customer(String firstname, String lastname){
+        super(firstname, lastname);
+        setAddress(new Address());
+        setContact(new Contact());
         this.accounts = new HashMap<>();
     }
 
-    public void setCustomerId(String customerId) {
+    @Override
+    public void setCustomerID(String id) {
         this.customerId = "00" + customerId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    @Override
+    public void setAddress(Address a) {
+        this.address = a;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    @Override
+    public void setBankCard(BankCard b) {
+        this.bankCard = b;
     }
 
-    public void setAccountType(AccountType accountType) {
+    @Override
+    public void setContact(Contact c) {
+        this.contact = c;
     }
 
-    public void setCategory(CategoryType categoryType) {
+    @Override
+    public String getCustomerID() {
+        return this.customerId;
     }
 
-    public String getCustomerId() {
-        return customerId;
+    @Override
+    public Address getAddress() {
+        return this.address;
     }
 
-    public String getEmail() {
-        return email;
+    @Override
+    public BankCard getBankCard() {
+        return this.bankCard;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    @Override
+    public Contact getContact() {
+        return this.contact;
     }
 
-    public void addAccount(Account account) {
-        // Add the account to the map, using account number as the key
-        // And be able to store the account details
-        accounts.put(account.getAccountNumber(), account);
-
-    }
-
-    public void setBankCard(BankCard bankCard) {
-        this.bankCard = bankCard;
-    }
-
+    @Override
     public Map<String, Account> getAccounts() {
         // This method gets the list of the Accounts opened by the user
         // Users are allowed to have multiple accounts under 1 customer
         // Hence the Map Collection for implementation.
-        return accounts;
+        return this.accounts;
     }
+
+    @Override
+    public int getTotalAccount() {
+        // This will return how many accounts does the customer has under them.
+        return accounts.size();
+    }
+
+    @Override
+    public double getTotalAccountValue(){
+        // This sums all the money or balance on the customers account.
+        return accounts.values().stream()
+                .filter(b -> b.getBalance() > 0)
+                .mapToDouble(Account::getBalance)
+                .sum();
+    }
+
+    @Override
+    public void addAccount(Account a) {
+        // Add the account to the map, using account number as the key
+        // And be able to store the account details
+        accounts.put(a.getAccountNumber(), a);
+    }
+
+    @Override
+    public Account getCheckingAccount(Account byRef_accountNumber) {
+        return accounts.get(byRef_accountNumber.getCheckingAccountNumber());
+    }
+
+    @Override
     public Account getAccountByNumber(String accountNumber) {
         // Get account by account number (key)
         // which is the Account number so if retrieving a specific account
@@ -81,33 +140,25 @@ public class Customer extends Person {
         return accounts.get(accountNumber);
     }
 
-    public Account getCheckingAccount(Account byRef_accountNumber){
-        return accounts.get(byRef_accountNumber.getCheckingAccountNumber());
-    }
-    public double getTotalAccountValue(){
-        return accounts.values().stream()
-                .filter(b -> b.getBalance() > 0)
-                .mapToDouble(Account::getBalance)
-                .sum();
-    }
-    public int getTotalAccount(){
-        return accounts.size();
-    }
     @Override
     public String toString() {
         return "Customer Information{" +
                 "\nCustomer Id = '" + customerId + '\'' +
                 "\n==================================================================="+
                 "\n" + super.toString() +
-                "\nemail='" + email + '\'' +
-                "\nphoneNumber='" + phoneNumber + '\'' +
+                "\nemail='" + contact.getEmail() + '\'' +
+                "\nphoneNumber='" + contact.getPhoneNumber() + '\'' +
                 "\n===================================================================\n" +
                 "\nCustomer Accounts\n" +
                 formattedString() +
-                "\naddress=" + getAddress() +
+                "\naddress=" + address.getFullAddress() +
                 '}';
     }
-    public String formattedString(){
+
+    @Override
+    public String formattedString() {
+
+        // This Method is only for Terminal use for visualising the data object into a table
         StringBuilder accountNumbers = new StringBuilder("Account Numbers:\n");
         accountNumbers.append("Account ID  |    Account Number    |   Account Type   |  Balance  |\n");
         accountNumbers.append("===================================================================\n");
@@ -121,5 +172,4 @@ public class Customer extends Person {
         }
         return accountNumbers.toString();
     }
-
 }

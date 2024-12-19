@@ -2,6 +2,7 @@ package main.java;
 
 import data.customer.Gender;
 import operations.AccountProcess;
+import test.customer.TestAddCustomer;
 
 import java.io.FileNotFoundException;
 
@@ -19,10 +20,10 @@ public class Main {
 
 
 //        TestAddCustomer testAddCustomer = new TestAddCustomer(accountProcess);
-
+//
 //        testAddCustomer.readDataCsv();
-
-
+//
+//
 //        testAddCustomer.getCsvData().forEach(user -> System.out.println(user.toString()));
 //        System.out.println(testAddCustomer.getCsvData().size());
     }

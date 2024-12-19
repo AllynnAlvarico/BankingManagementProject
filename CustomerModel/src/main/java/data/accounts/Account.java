@@ -1,5 +1,19 @@
 package data.accounts;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * This Class is
+ */
+
+/*
+ * Comment:
+ *      This Class or Project is now Messy I feel like Im not going forward!
+ *      I need Guidance here!
+ *      5.03 am
+ */
+
 public class Account {
     private static int accountTotal;
     private String accountId;
@@ -7,6 +21,7 @@ public class Account {
     private String checkingAccountNumber;
 
     private AccountType  accountType;
+    private final List<Transaction> transactions;
     private double balance;
 
     public enum AccountType{
@@ -43,6 +58,7 @@ public class Account {
         this.accountNumber = accountNumber;
         this.accountType = accountType;
         this.balance = 0.0d;
+        this.transactions = new ArrayList<>();
     }
 
     public void setAccountId() {
@@ -82,6 +98,10 @@ public class Account {
         return balance;
     }
 
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
     public void deposit(double amount) {
         // Bug here! How will the system know which to deposit the amount???
         // need to find a solution for this.
@@ -98,6 +118,15 @@ public class Account {
             System.out.println("Amount must be positive.");
         }
     }
+    public void deposit(double amount, String description) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Deposit amount must be positive.");
+        }
+        balance += amount;
+        addTransaction(Transaction.TransactionType.DEPOSIT, amount, description);
+    }
+
+
     public void withdraw(double amount) {
         if (amount > 0 && amount <= balance) {
             this.balance -= amount;
@@ -106,9 +135,32 @@ public class Account {
             System.out.println("Insufficient balance or invalid amount.");
         }
     }
+    public void withdraw(double amount, String description) {
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Withdrawal amount must be positive.");
+        }
+        if (amount > balance) {
+            throw new IllegalArgumentException("Insufficient balance.");
+        }
+        balance -= amount;
+        addTransaction(Transaction.TransactionType.WITHDRAWAL, amount, description);
+    }
+
+    private void addTransaction(Transaction.TransactionType type, double amount, String description) {
+        String transactionId = "TXN-" + (transactions.size() + 1);
+        Transaction transaction = new Transaction(transactionId, accountNumber, type, amount, description);
+        transactions.add(transaction);
+    }
 
     public static int getAccountTotal() {
         return accountTotal;
+    }
+
+    public void printTransactionHistory() {
+        System.out.println("Transaction History for Account: " + accountNumber);
+        for (Transaction transaction : transactions) {
+            System.out.println(transaction);
+        }
     }
 
     @Override

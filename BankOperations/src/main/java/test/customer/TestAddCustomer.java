@@ -2,6 +2,8 @@ package test.customer;
 
 import data.customer.Customer;
 import operations.AccountProcess;
+import operations.AccountType;
+import operations.CategoryType;
 import util.DataUtilities;
 
 import java.io.*;
@@ -69,45 +71,45 @@ public class TestAddCustomer {
         }
     }
 
-//    public void readDataCsv() {
-//
-//        String line;
-//        String splitBy = ",";
-//
-//        try {
-////            BufferedReader csvReader = new BufferedReader(new FileReader(this.myFile));
-////            while ((line = csvReader.readLine()) != null)// &&
-////            {
-//////                CustomerInformation customer = new CustomerInformation();
-//////                String[] item = line.split(splitBy);
-//////                if (!line.contains(headers[0])) {
-//////                    customer.setCustomerID(item[0]);
-//////                    customer.setName(item[1]);
-//////                    customer.setSurname(item[2]);
-//////                    customer.setUsername(item[3]);
-//////                    customer.setPassword(item[4]);
-//////                    customer.setAddress1(item[5]);
-//////                    customer.setAddress2(item[6]);
-//////                    customer.setTown(item[7]);
-//////                    customer.setState(item[8]);
-//////                    customer.setZipcode(item[9]);
-//////                    customer.setPhoneNumber(item[10]);
-//////                    customer.setEmail(item[11]);
-//////                    customer.setPassportInformation(item[12]);
-//////                    customer.setAccountNumber(item[13]);
-//////                    customer.setCardNumber(item[14]);
-//////                    customer.setCardPin(item[15]);
-//////                    customer.setBalance(item[16]);
-//////                    customer.setAccountType(item[17]);
-//////                    customer.setCategory(item[18]);
-////
-////                    csvData.add(customer);
-//                }
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void readDataCsv() {
+
+        String line;
+        String splitBy = ",";
+
+        try {
+            BufferedReader csvReader = new BufferedReader(new FileReader(this.myFile));
+            while ((line = csvReader.readLine()) != null)// &&
+            {
+                Customer customer = new Customer();
+                String[] item = line.split(splitBy);
+                if (!line.contains(headers[0])) {
+//                    customer.setCustomerId(item[0]);
+                    customer.setFirstname(item[1]);
+                    customer.setLastname(item[2]);
+//                    customer.setUsername(item[3]);
+//                    customer.setPassword(item[4]);
+//                    customer.setAddress1(item[5]);
+//                    customer.setAddress2(item[6]);
+//                    customer.setTown(item[7]);
+//                    customer.setState(item[8]);
+//                    customer.setZipcode(item[9]);
+//                    customer.setPhoneNumber(item[10]);
+//                    customer.setEmail(item[11]);
+//                    customer.setPassportInformation(item[12]);
+//                    customer.setAccountNumber(item[13]);
+//                    customer.setCardNumber(item[14]);
+//                    customer.setCardPin(item[15]);
+//                    customer.setBalance(item[16]);
+//                    customer.setAccountType(AccountType.valueOf(item[17]));
+//                    customer.setCategory(CategoryType.valueOf(item[18]));
+
+                    csvData.add(customer);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public void addDataElement(AccountProcess accountProcess) {

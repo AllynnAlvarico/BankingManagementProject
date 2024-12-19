@@ -16,16 +16,16 @@ public class AccountProcess {
             String byVal_address1, String byVal_address2, String byVal_town, String byVal_state, String byVal_zipcode,
             Gender byVal_gender, byte byVal_age, String byVal_email, String byVal_phone)
     {
-        customer = new Customer(
-                byVal_name, byVal_surname, byVal_dob, byVal_nationality,
-                new Address(byVal_address1, byVal_address2, byVal_town, byVal_state, byVal_zipcode),
-                byVal_gender.name(), byVal_age, byVal_email, byVal_phone);
+//        customer = new Customer(
+//                byVal_name, byVal_surname, byVal_dob, byVal_nationality,
+//                setCustomerAddress(byVal_address1, byVal_address2, byVal_town, byVal_state, byVal_zipcode),
+//                byVal_gender.name(), byVal_age, byVal_email, byVal_phone);
 
-        customer.setCustomerId(Person.getPersonID().toString());
+//        customer.setCustomerId(Person.getPersonID().toString());
 
         createCheckingAccount();
-        createSavingsAccount();
-        createBusinessAccount();
+        createAccount(Account.AccountType.SAVINGS);
+        createAccount(Account.AccountType.BUSINESS);
 
 
         // testing for depositing and withdrawing to specific account...
@@ -54,30 +54,28 @@ public class AccountProcess {
         System.out.println("Checking Account Number is " +account.getCheckingAccountNumber());
 
         System.out.println("Total Amount of Customer Has in Account is " + getAccountUser().getTotalAccountValue());
-//        account.withdraw(300);
-
-//        customer.setCategory(CategoryType.PERSONAL);
-//        descriptionCategory = CategoryType.PERSONAL.getDescription(CategoryType.PERSONAL.name());
     }
     public void createCheckingAccount(){
         String checkingAccountNumber = utilities.generateAccountNumber();
         account = new Checking(checkingAccountNumber, Account.AccountType.CHECKING);
-        customer.addAccount(account);
+//        customer.addAccount(account);
         account.setCheckingAccountNumber(checkingAccountNumber);
     }
-    public void createSavingsAccount(){
-        customer.addAccount(new Saving(utilities.generateAccountNumber(), Account.AccountType.SAVINGS));
+    private void createAccount(Account.AccountType type) {
+        switch (type) {
+//            case SAVINGS -> customer.addAccount(new Saving(utilities.generateAccountNumber(), type));
+//            case BUSINESS -> customer.addAccount(new Business(utilities.generateAccountNumber(), type));
+            default -> throw new IllegalArgumentException("Invalid account type: " + type);
+        }
     }
-    public void createBusinessAccount(){
-        customer.addAccount(new Business(utilities.generateAccountNumber(), Account.AccountType.BUSINESS));
-    }
-    public void checkCustomerIfPremium(){
-        if (customer.getTotalAccountValue() > 100_000) setCategoryType(5);
-    }
+//    public void checkCustomerIfPremium(){
+//        if (customer.getTotalAccountValue() > 100_000) setCategoryType(5);
+//    }
     public void setCustomerBankCard(){
         card = new BankCard(utilities.generateCardNumber(),
-                customer.getCheckingAccount(account));
-        customer.setBankCard(card);
+//                customer.getCheckingAccount(account));
+//        customer.setBankCard(card);
+
     }
 
 
@@ -92,13 +90,9 @@ public class AccountProcess {
 //        accountUser.setBalance(byVal_balance);
 //    }
 
-//    public void setCustomerAddress(String byVal_address1, String byVal_address2, String byVal_town, String byVal_state, String byVal_zipcode) {
-//        accountUser.setAddress1(byVal_address1);
-//        accountUser.setAddress2(byVal_address2);
-//        accountUser.setTown(byVal_town);
-//        accountUser.setState(byVal_state);
-//        accountUser.setZipcode(byVal_zipcode);
-//    }
+    public Address setCustomerAddress(String byVal_address1, String byVal_address2, String byVal_town, String byVal_state, String byVal_zipcode) {
+        return new Address(byVal_address1, byVal_address2, byVal_town, byVal_state, byVal_zipcode);
+    }
 //
 //    public void setAccountUserContact(String byVal_phoneNumber, String byVal_email) {
 //        accountUser.setPhoneNumber(byVal_phoneNumber);
@@ -112,31 +106,31 @@ public class AccountProcess {
     public void setCategoryType(int byVal_selectedType){
         switch (byVal_selectedType) {
             case 1:
-                customer.setCategory(CategoryType.YOUTH);
+//                customer.setCategory(CategoryType.YOUTH);
                 descriptionCategory = CategoryType.YOUTH.getDescription(CategoryType.YOUTH.toString());
                 break;
             case 2 :
-                customer.setCategory(CategoryType.STUDENT);
+//                customer.setCategory(CategoryType.STUDENT);
                 descriptionCategory = CategoryType.STUDENT.getDescription(CategoryType.STUDENT.toString());
                 break;
             case 3:
-                customer.setCategory(CategoryType.SENIOR_CITIZEN);
+//                customer.setCategory(CategoryType.SENIOR_CITIZEN);
                 descriptionCategory = CategoryType.SENIOR_CITIZEN.getDescription(CategoryType.SENIOR_CITIZEN.toString());
                 break;
             case 4:
-                customer.setCategory(CategoryType.BUSINESS);
+//                customer.setCategory(CategoryType.BUSINESS);
                 descriptionCategory = CategoryType.BUSINESS.getDescription(CategoryType.BUSINESS.toString());
                 break;
             case 5:
-                customer.setCategory(CategoryType.PREMIUM);
+//                customer.setCategory(CategoryType.PREMIUM);
                 descriptionCategory = CategoryType.PREMIUM.getDescription(CategoryType.PREMIUM.toString());
                 break;
             case 6:
-                customer.setCategory(CategoryType.BLACKLISTED);
+//                customer.setCategory(CategoryType.BLACKLISTED);
                 descriptionCategory = CategoryType.BLACKLISTED.getDescription(CategoryType.BLACKLISTED.toString());
                 break;
             default:
-                customer.setCategory(CategoryType.PERSONAL);
+//                customer.setCategory(CategoryType.PERSONAL);
                 descriptionCategory = CategoryType.PERSONAL.getDescription(CategoryType.PERSONAL.toString());
                 break;
         }

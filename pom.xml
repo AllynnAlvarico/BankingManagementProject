@@ -12,6 +12,7 @@
     <modules>
         <module>CustomerModel</module>
         <module>BankOperations</module>
+        <module>Database</module>
     </modules>
 
     <properties>
